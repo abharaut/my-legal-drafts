@@ -1,0 +1,231 @@
+<?php include_once("controller.php"); ?>
+<?php
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
+
+if($email != false && $password != false){
+    $query = "SELECT * FROM usersInfo WHERE email = '$email' AND password = '$password'";
+    $run_query = mysqli_query($conn , $query);
+    if($run_query){
+        $fetch_data = mysqli_fetch_assoc($run_query);
+        $status = $fetch_data['status'];
+        if($status != "Verified"){
+            header("location: otp.php");
+        }
+    }
+}else{
+    header('location: login.php');
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!--TITLE-->
+  <title>My Legal Drafts</title>
+
+  <!--ICON-->
+  <link rel="shortcut icon" href="images/MLD_logo-removebg-preview.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+  <!--EXTERNAL CSS-->
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="style.css">
+
+
+  <!-- Bootstrap 3.4.1 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <!--PLUGIN-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <!--FONT AWESOME-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+  <!--GOOGLE FONTS-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fredoka+One&family=Kanit:wght@300&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top "
+    style="background-color: #2a2a72;background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);  padding-top:15px; padding-bottom:30px; height: 100px;">
+    <div class="container-fluid">
+      <div class="navbar-header" style="height:50px; width:auto;">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"></a>
+        <img src="images/MLD_logo-removebg-preview.png" height=70px width=auto style="border-radius: 50%;">
+      </div>
+      <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right " >
+          <li><a href="index1.php"
+              style="color:white; font-family: 'Quicksand', sans-serif;font-size: 18px; font-weight: 250; padding: 15px 15px 15px 15px;">
+              <b>MLD</b></a>
+          </li>
+          <li><a href="volunteersForm.html"
+              style="color:white; font-family: 'Quicksand', sans-serif;font-size: 18px; font-weight: 250; padding: 15px 15px 15px 15px;">
+              <b>Contact us</b></a></li>
+
+          <li><a href="aboutus.html"
+              style="color:white; font-family: 'Quicksand', sans-serif;font-size: 18px;font-weight: 250; padding: 15px 15px 15px 15px;">
+              <b>About us</b></a></li>
+          <li><a href="signup.php"
+              style="color:white; font-family: 'Quicksand', sans-serif;font-size: 18px;font-weight: 250; padding: 15px 15px 15px 15px;">
+              <b>Logout</b></a>
+          </li>
+          <li>
+            <div style="width: 200px; font-size: 20px; color: #fff; padding-top: 10px; font-weight: bold; font-family: 'Quicksand', sans-serif;"
+            class="heyuser">  Hey, <?php if (isset($_SESSION['name'])) {
+            echo $_SESSION['name'];
+            }?>! </div></div>
+          </li>
+        </ul>
+        <!-- <div style="width: 200px;"
+            class="heyuser">  Hey, <?php if (isset($_SESSION['name'])) {
+            echo $_SESSION['name'];
+            }?>! 
+        </div> -->  
+      </div>
+    </div>  
+  </nav>
+
+
+  <!-- Chatbot -->
+  <!DOCTYPE html>
+  <html>
+    <body>
+      <iframe src="https://copilotstudio.microsoft.com/environments/Default-09bd1956-edda-4e9a-9543-7c7aa2cf4e81/bots/cr2a4_legalDraft/webchat?_version_=2" 
+        frameborder="0" 
+        style="width: 50%; height: 800px;" >
+      </iframe>
+  </body>
+    </html>
+
+  <!--MAIN-->
+
+  <div class="main img-responsive">
+    <table>
+      <tr>
+        <td>
+          <section>
+
+            <h1 class="title">My Legal Drafts</h1>
+            <p>Your virtual legal companion!</p>
+          </section>
+        </td>
+        <td>
+          <img src="images/home-bot.png" class="inline-photo show-on-scroll" alt="INFERNO">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+  <!--CARDS-->
+  <section class="section0" id="sections">
+    <!-- <div class="card banner">
+      <h1 class="title">MLD exclusive Services</h1>
+      <h5 class="sub-title">Explore Our Premier Offerings:
+        Discover tailored solutions designed to simplify legal intricacies, streamline understanding, and distill vital insights from complex documents. Delve into our featured services for comprehensive legal guidance.</h5>
+    </div> -->
+    <!-- <div class="card inline-photo show-on-scroll services-1-img">
+      <h3>Legal Document Summarization</h3>
+    </div>
+    <div class="card inline-photo show-on-scroll services-3-img">
+      <h3>Tailored Document Summarization:</h3>
+    </div>
+    <div class="card inline-photo show-on-scroll services-2-img">
+      <h3>AI-Powered Features</h3>
+    </div>
+    <div class="card inline-photo show-on-scroll services-4-img">
+      <h3>Multilingual support:</h3>
+    </div> -->
+  </section>
+
+
+  
+  <div class="container">
+    <table>
+      <tr>
+        <td>
+          <img src="images/objective-img.jpg" class="inline-photo show-on-scroll" alt="About Us">
+        </td>
+        <td>
+          <h5 class="sub-title">Discover MLD</h5>
+          <h1 class="title">Get ease in complex legalities</h1>
+          <p>Objective of MLD is to get ease in complex legalities with an AI-powered solution that can simplify legal documentation for individuals and small businesses in India, by automatically drafting legal documents in plain language and using easy-to-understand terms.
+          </p>
+          <br>
+          <a href="aboutus.html" class="btn2">Discover More</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+
+  
+  <!-- Site footer -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="grid-container">
+        <div class="grid-item">
+
+          <img src="images/MLD_logo-removebg-preview.png" class="logo-img" style="border-radius: 50%;">
+
+        </div>
+
+        <div class="grid-item inner-grid-container">
+
+          <div class="grid-item"><a href="index.html">Home</a></div>
+          <div class="grid-item"><a href="projects.html">Get Started</a></div>
+          <div class="grid-item"><a href="volunteersForm.html">Contact Us</a></div>
+        </div>
+
+        <div class="grid-item">
+          <div class="social-buttons" style="float:left;">
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram circle-icon"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook circle-icon"></i></a>
+            <a href="https://api.whatsapp.com" target="_blank"><i class="fab fa-whatsapp circle-icon"></i></a><br>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in circle-icon"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter circle-icon"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <p style="text-align: center;">Copyright © 2023 My Legal Drafts | All rights reserved</p>
+
+    </div>
+  </footer>
+
+
+
+
+  <!--JAVASCRIPT-->
+  <script src="custom.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
